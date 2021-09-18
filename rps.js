@@ -1,3 +1,5 @@
+//GAME FUNCTIONS
+
 const computerPlay = function () {
   const choices = ['rock', 'paper', 'scissors']
   const randomChoiceIndex = Math.floor(Math.random()*3)
@@ -23,14 +25,16 @@ const game = function () {
   let playerWins = 0;
   let computerWins = 0;
 
-  for(let i = 0; i < 5; i++) {
-    let playerSelection = prompt('rock, paper, or scissors')
-    let computerSelection = computerPlay();
-    let result = playRound(playerSelection, computerSelection);
-    console.log('you have played: ' + playerSelection + ", computer has played: " + computerSelection)
-    computerWins -= result;
-    playerWins += result;
-  }
+
+  let playerSelection = prompt('rock, paper, or scissors')
+  let computerSelection = computerPlay();
+  let result = playRound(playerSelection, computerSelection);
+
+  console.log('you have played: ' + playerSelection + ", computer has played: " + computerSelection)
+
+  computerWins -= result;
+  playerWins += result;
+
 
   if (playerWins > computerWins) {
     return 'player has won';
@@ -40,8 +44,44 @@ const game = function () {
     return 'tie'
   }
 }
+
+
+
+
+//DOM MANIPULATION
+
+//const choices = document.querySelectorAll('button')
+
+let buttons = document.querySelectorAll('button')
+
+
+buttons.forEach(function(button) {
+  button.addEventListener('click', function (e) {
+
+    const winner = playRound(this.id, computerPlay());
+
+    if (winner === 1) {
+      //player wins
+    } else if (winner === 0) {
+      //tie
+    } else if (winner === -1) {
+      //computer wins
+    }
+  })
+})
+
+const results = document.querySelector('.results')
+
+results.
+
+
+
+
+
+
 /**
  * rock beats scissors
  * paper beats rock
  * scissors beats paper
  *  */
+
