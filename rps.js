@@ -9,6 +9,7 @@ const computerPlay = function () {
 const playRound = function (playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
   computerSelection = computerSelection.toLowerCase();
+  console.log('computer plays ' + computerSelection)
   if (playerSelection === "rock" && computerSelection === "scissors" || playerSelection === 'paper' && computerSelection === 'rock' || playerSelection === 'scissors' && computerSelection === 'paper') {
     return 1
   } else if (playerSelection === 'rock' && computerSelection === 'rock' || playerSelection === 'paper' && computerSelection === 'paper' || playerSelection === 'scissors' && computerSelection === 'scissors' ) {
@@ -53,26 +54,49 @@ const game = function () {
 //const choices = document.querySelectorAll('button')
 
 let buttons = document.querySelectorAll('button')
+const results = document.querySelector('.results')
+const playerScore = document.getElementById('playerScore')
+const tieScore = document.getElementById('tieScore')
+const computerScore = document.getElementById('computerScore')
+const recap = document.getElementById('recap')
 
+let player = 0
+let computer = 0
+let tie = 0
+
+playerScore.innerHTML = 'player score: ' + player
+computerScore.innerHTML = 'computer score: ' + computer
+tieScore.innerHTML = 'ties: ' + tie
 
 buttons.forEach(function(button) {
   button.addEventListener('click', function (e) {
-
-    const winner = playRound(this.id, computerPlay());
+    let compChoice = computerPlay();
+    const winner = playRound(this.id, compChoice);
 
     if (winner === 1) {
       //player wins
+      //target playerScore id and update that score
+      player++
+      playerScore.innerHTML = 'player score: ' + player
+      recap.innerHTML = 'you played ' + this.id + ' and the computer played ' + compChoice + ' and you won!'
     } else if (winner === 0) {
       //tie
+      //target tieScore id and update that score
+      tie++
+      tieScore.innerHTML = 'ties: ' + tie
+      recap.innerHTML = 'you played ' + this.id + ' and the computer played ' + compChoice + ' and it\'s a tie!'
     } else if (winner === -1) {
       //computer wins
+      computer++
+      computerScore.innerHTML = 'computer score: ' + computer
+      recap.innerHTML = 'you played ' + this.id + ' and the computer played ' + compChoice + ' and the computer wins!'
     }
+
   })
 })
 
-const results = document.querySelector('.results')
 
-results.
+
 
 
 
